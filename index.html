@@ -249,6 +249,236 @@ body {
   overflow-x: hidden;
 }
 
+/* Background Animation Canvas */
+#bgCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.05; /* 🔽 Reduced opacity */
+  pointer-events: none;
+}
+
+/* Navbar */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(10,15,31,0.6);
+  backdrop-filter: blur(10px);
+  padding: 15px;
+  text-align: center;
+  z-index: 10;
+}
+
+nav a {
+  color: #00ccff;
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Sections */
+section {
+  min-height: 100vh;
+  padding: 100px 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Hero */
+#hero h1 {
+  font-size: 3.5rem;
+  color: #00ccff;
+}
+
+#hero h2 {
+  margin-top: 15px;
+  font-weight: 300;
+  color: #aaa;
+}
+
+/* Card Style */
+.card {
+  background: rgba(255,255,255,0.06);
+  border-radius: 15px;
+  padding: 30px;
+  margin: 20px 0;
+  box-shadow: 0 0 20px rgba(0,204,255,0.15);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 30px rgba(0,204,255,0.4);
+}
+
+h2 {
+  color: #00ccff;
+  margin-bottom: 15px;
+}
+
+ul {
+  margin-left: 20px;
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #888;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="bgCanvas"></canvas>
+
+<nav>
+  <a href="#hero">Home</a>
+  <a href="#about">About</a>
+  <a href="#education">Education</a>
+  <a href="#internship">Internship</a>
+  <a href="#projects">Projects</a>
+  <a href="#skills">Skills</a>
+</nav>
+
+<section id="hero">
+  <h1>Maheera Begam M</h1>
+  <h2>Electronics and Communication Engineering Student</h2>
+</section>
+
+<section id="about">
+  <div class="card">
+    <h2>Career Objective</h2>
+    <p>
+      Prefinal year Electronics and Communication Engineering student with strong academic
+      performance (CGPA: 8.8) seeking opportunities to apply technical knowledge,
+      communication skills, and problem-solving abilities in a challenging engineering
+      environment.
+    </p>
+  </div>
+</section>
+
+<section id="education">
+  <div class="card">
+    <h2>Education</h2>
+    <ul>
+      <li><b>B.E. Electronics and Communication Engineering</b> – Government College of Engineering, Tirunelveli (Prefinal Year) – CGPA: 8.8</li>
+      <li><b>Higher Secondary</b> – Shunmuga Sundara Nadar Higher Secondary School – 95.8%</li>
+    </ul>
+  </div>
+</section>
+
+<section id="internship">
+  <div class="card">
+    <h2>Internship</h2>
+    <p><b>Industrial Automation Intern – IPCS Global</b></p>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="card">
+    <h2>Project</h2>
+    <p>
+      <b>Anti-Sleep Vibrator Alarm for Drivers</b><br><br>
+      Developed during 2nd year for Tech Expo (Intra-college technical event).
+      Designed to prevent accidents caused by driver drowsiness.
+    </p>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="card">
+    <h2>Technical Participation</h2>
+    <ul>
+      <li>Participated in inter-college technical events including Paper Presentations.</li>
+      <li>Participated in Smart India Hackathon (Intra-college Level).</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Skills</h2>
+    <ul>
+      <li>Good Communication Skills</li>
+      <li>Eager Learner</li>
+      <li>Basic Knowledge in Industrial Automation</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  © 2026 Maheera Begam M | Resume Portfolio
+</footer>
+
+<script>
+const canvas = document.getElementById("bgCanvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let frame = 1;
+const totalFrames = 240;
+const images = [];
+
+// Load frames
+for (let i = 1; i <= totalFrames; i++) {
+  const img = new Image();
+  const num = String(i).padStart(3, '0');
+  img.src = `frames/ezgif-frame-${num}.jpg`;
+  images.push(img);
+}
+
+// Draw frame
+function drawFrame(index) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  if (images[index]) {
+    ctx.drawImage(images[index], 0, 0, canvas.width, canvas.height);
+  }
+}
+
+// Scroll control animation
+window.addEventListener("scroll", () => {
+  const scrollTop = document.documentElement.scrollTop;
+  const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrollFraction = scrollTop / scrollHeight;
+  frame = Math.min(totalFrames - 1, Math.floor(scrollFraction * totalFrames));
+  drawFrame(frame);
+});
+
+// Resize support
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Maheera Begam M | Resume Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background: #0a0f1f;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
 /* Canvas Animation */
 #bgCanvas {
   position: fixed;
