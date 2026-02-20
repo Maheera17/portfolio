@@ -2,119 +2,103 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Maheera Begam M | Portfolio</title>
+<title>Maheera Begam M | Resume Portfolio</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Segoe UI, sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
 }
 
-body{
-  background:#020617;
-  color:white;
-  overflow-x:hidden;
+body {
+  background: #0a0f1f;
+  color: #ffffff;
+  overflow-x: hidden;
 }
 
-/* Background animation */
-#bgCanvas{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  z-index:-2;
-  opacity:0.25; /* increase/decrease here */
-  filter: brightness(1.4) contrast(1.3) saturate(1.3);
-  pointer-events:none;
-}
-
-/* Overlay for readability */
-#overlay{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:radial-gradient(circle at top,
-    rgba(0,180,255,0.25),
-    rgba(2,6,23,0.85)
-  );
-  z-index:-1;
+/* Canvas Animation */
+#bgCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.12;
+  pointer-events: none;
 }
 
 /* Navbar */
-nav{
-  position:fixed;
-  top:0;
-  width:100%;
-  background:rgba(0,0,0,0.4);
-  backdrop-filter:blur(10px);
-  padding:15px;
-  text-align:center;
-  z-index:10;
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(10,15,31,0.6);
+  backdrop-filter: blur(10px);
+  padding: 15px;
+  text-align: center;
+  z-index: 10;
 }
 
-nav a{
-  color:#00ccff;
-  margin:0 15px;
-  text-decoration:none;
-  font-weight:bold;
+nav a {
+  color: #00ccff;
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 /* Sections */
-section{
-  min-height:100vh;
-  padding:100px 10%;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
+section {
+  min-height: 100vh;
+  padding: 100px 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /* Hero */
-#hero h1{
-  font-size:3.5rem;
-  color:#00ccff;
-  text-shadow:0 0 20px #00ccff;
+#hero h1 {
+  font-size: 3.5rem;
+  color: #00ccff;
 }
 
-#hero h2{
-  margin-top:15px;
-  color:#ccc;
+#hero h2 {
+  margin-top: 15px;
+  font-weight: 300;
+  color: #aaa;
 }
 
-/* Cards */
-.card{
-  background:rgba(255,255,255,0.08);
-  border-radius:16px;
-  padding:30px;
-  margin:20px 0;
-  box-shadow:0 0 25px rgba(0,204,255,0.2);
-  backdrop-filter:blur(8px);
-  transition:0.3s;
+/* Card */
+.card {
+  background: rgba(255,255,255,0.05);
+  border-radius: 15px;
+  padding: 30px;
+  margin: 20px 0;
+  box-shadow: 0 0 20px rgba(0,204,255,0.15);
+  transition: 0.3s;
 }
 
-.card:hover{
-  transform:translateY(-4px);
-  box-shadow:0 0 40px rgba(0,204,255,0.5);
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 30px rgba(0,204,255,0.4);
 }
 
-h2{
-  color:#00ccff;
-  margin-bottom:15px;
+h2 {
+  color: #00ccff;
+  margin-bottom: 15px;
 }
 
-ul{
-  margin-left:20px;
+ul {
+  margin-left: 20px;
 }
 
-footer{
-  text-align:center;
-  padding:30px;
-  color:#aaa;
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #888;
 }
 </style>
 </head>
@@ -122,7 +106,6 @@ footer{
 <body>
 
 <canvas id="bgCanvas"></canvas>
-<div id="overlay"></div>
 
 <nav>
   <a href="#hero">Home</a>
@@ -198,7 +181,7 @@ footer{
 </section>
 
 <footer>
-  © 2026 Maheera Begam M | Portfolio
+  © 2026 Maheera Begam M | Resume Portfolio
 </footer>
 
 <script>
@@ -212,33 +195,29 @@ let frame = 1;
 const totalFrames = 240;
 const images = [];
 
-/* Load frames */
 for (let i = 1; i <= totalFrames; i++) {
   const img = new Image();
-  const num = String(i).padStart(3, "0");
+  const num = String(i).padStart(3, '0');
   img.src = `frames/ezgif-frame-${num}.jpg`;
   images.push(img);
 }
 
-/* Draw frame */
-function drawFrame(i){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  if(images[i]){
-    ctx.drawImage(images[i],0,0,canvas.width,canvas.height);
+function drawFrame(index) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  if (images[index]) {
+    ctx.drawImage(images[index], 0, 0, canvas.width, canvas.height);
   }
 }
 
-/* Scroll animation */
-window.addEventListener("scroll",()=>{
+window.addEventListener("scroll", () => {
   const scrollTop = document.documentElement.scrollTop;
   const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
   const scrollFraction = scrollTop / scrollHeight;
-  frame = Math.min(totalFrames-1, Math.floor(scrollFraction * totalFrames));
+  frame = Math.min(totalFrames - 1, Math.floor(scrollFraction * totalFrames));
   drawFrame(frame);
 });
 
-/* Resize */
-window.addEventListener("resize",()=>{
+window.addEventListener("resize", () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 });
